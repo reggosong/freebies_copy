@@ -1,0 +1,236 @@
+{
+  "info": {
+    "name": "Freebies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Sign Up",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8000/auth/signup",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"testuser\",\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8000/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "Create Post",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8000/posts",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Free Pizza",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Leftover pizza from party",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "leftovers",
+                  "type": "text"
+                },
+                {
+                  "key": "latitude",
+                  "value": "37.7749",
+                  "type": "text"
+                },
+                {
+                  "key": "longitude",
+                  "value": "-122.4194",
+                  "type": "text"
+                },
+                {
+                  "key": "photo",
+                  "type": "file",
+                  "src": "/path/to/your/image.jpg"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Feed",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8000/posts?skip=0&limit=20&category=leftovers&latitude=37.7749&longitude=-122.4194&radius=5&following_only=false",
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "category",
+                  "value": "leftovers"
+                },
+                {
+                  "key": "latitude",
+                  "value": "37.7749"
+                },
+                {
+                  "key": "longitude",
+                  "value": "-122.4194"
+                },
+                {
+                  "key": "radius",
+                  "value": "5"
+                },
+                {
+                  "key": "following_only",
+                  "value": "false"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8000/users/me",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "url": "http://localhost:8000/users/me",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "bio",
+                  "value": "Food lover",
+                  "type": "text"
+                },
+                {
+                  "key": "latitude",
+                  "value": "37.7749",
+                  "type": "text"
+                },
+                {
+                  "key": "longitude",
+                  "value": "-122.4194",
+                  "type": "text"
+                },
+                {
+                  "key": "profile_picture",
+                  "type": "file",
+                  "src": "/path/to/your/profile.jpg"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Messages",
+      "item": [
+        {
+          "name": "Get Inbox",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8000/messages",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get Unread Count",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8000/messages/unread/count",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
